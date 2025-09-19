@@ -12,6 +12,8 @@ import (
 	_ "github.com/mattn/go-sqlite3"
 )
 
+const AWESOME_API_USD_BRL_URL = "https://economia.awesomeapi.com.br/json/last/USD-BRL"
+
 type QuotationResponse struct {
 	USDBRL struct {
 		Code       string `json:"code"`
@@ -81,7 +83,7 @@ func GetQuotationUsdBrl() (*QuotationResponse, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 200*time.Millisecond)
 	defer cancel()
 
-	req, err := http.NewRequestWithContext(ctx, http.MethodGet, "https://economia.awesomeapi.com.br/json/last/USD-BRL", nil)
+	req, err := http.NewRequestWithContext(ctx, http.MethodGet, AWESOME_API_USD_BRL_URL, nil)
 	if err != nil {
 		return nil, err
 	}
